@@ -4,9 +4,17 @@ const router = express.Router();
 
 // Retorna todos os pets
 router.get('/', (req,res,next) => {
-    res.status(200).send({
-        mensagem: 'Retorna os pets'
-    });
+    mysql.getConnection((error, conn) => {
+        if (error) { return res.status(500).send({error: error})}
+        conn.query(
+            'SELECT * FROM pets;',
+            (error,resultado,fields) => {
+                if (error) { return res.status(500).send({error: error})}
+                return res.status(200).send({response: resultado})
+            }
+        )
+    })
+
 });
 
 // CREATE
