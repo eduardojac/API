@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const rotaClientes = require('./routes/clientes');
 const rotaPets = require('./routes/pets');
+const rotaParceiros = require('./routes/parceiros');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -26,6 +27,7 @@ app.use((req,res,next) =>{
 
 app.use('/clientes', rotaClientes);
 app.use('/pets', rotaPets);
+app.use('/parceiros', rotaParceiros);
 
 // Quando não encontra a rota
 app.use((req,res,next) =>{
