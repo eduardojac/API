@@ -23,8 +23,8 @@ router.post('/', (req,res,next) => {
     mysql.getConnection((error,conn) => {
         if (error) { return res.status(500).send({error: error})}
         conn.query(
-            'INSERT INTO clientes (nome,cpf,sexo,email) VALUES (?,?,?,?)',
-            [req.body.nome, req.body.cpf,req.body.sexo,req.body.email],
+            'INSERT INTO clientes (nome,email,senha) VALUES (?,?,?)',
+            [req.body.nome, req.body.email,req.body.senha],
             (error,resultado,field) => {
                 conn.release(); //sempre faça o release, para liberar a conexão poiso o pool tem limite de conexões
 
@@ -62,8 +62,8 @@ router.patch('/', (req,res,next) => {
     mysql.getConnection((error,conn) => {
         if (error) { return res.status(500).send({error: error})}
         conn.query(
-            'UPDATE clientes SET nome = ?, cpf = ?, sexo = ?, email = ? WHERE id_cliente = ?',
-            [req.body.nome, req.body.cpf,req.body.sexo,req.body.email,req.body.id_cliente],
+            'UPDATE clientes SET nome = ?, email = ?, senha = ? WHERE id_cliente = ?',
+            [req.body.nome, req.body.email,req.body.senha,req.body.id_cliente],
             (error,resultado,field) => {
                 conn.release(); 
 
